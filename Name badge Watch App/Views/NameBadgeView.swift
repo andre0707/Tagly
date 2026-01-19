@@ -13,6 +13,8 @@ struct NameBadgeView: View {
     
     /// The user name to display
     let userName: String
+    /// The location to display
+    let location: String?
     /// The date to show below the
     let date: Date
     
@@ -24,11 +26,20 @@ struct NameBadgeView: View {
         VStack {
             Text(verbatim: userName)
                 .font(.largeTitle)
-                .padding(.vertical)
+//                .padding(.vertical)
             
+            if let location {
+//                Text(verbatim: "@ ")
+//                    .font(.largeTitle)
+                
+                Text(verbatim: "@ \(location)")
+                    .font(.title3)
+//                    .padding(.vertical)
+            }
             
             Text(date.formatted(date: .numeric, time: .omitted))
                 .font(.title3)
+                .padding(.top)
         }
         .contentShape(Rectangle())
         
@@ -48,5 +59,9 @@ struct NameBadgeView: View {
 // MARK: - Preview
 
 #Preview {
-    NameBadgeView(userName: "John Doe", date: .now)
+    NameBadgeView(userName: "John Doe", location: nil, date: .now)
+}
+
+#Preview("with location") {
+    NameBadgeView(userName: "John Doe", location: "GC12CRJ", date: .now)
 }

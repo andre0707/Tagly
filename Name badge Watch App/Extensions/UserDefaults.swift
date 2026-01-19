@@ -12,23 +12,41 @@ extension UserDefaults {
     enum Keys {
         static let selectedBackgroundColor = "selectedBackgroundColor"
         static let selectedForegroundColor = "selectedForegroundColor"
+        
+        static let userName = "userName"
+        static let location = "location"
     }
     
     /// The raw numeric value of the last selected background color
-    var selectedBackgroundColor: UInt32 {
+    var selectedBackgroundColor: String? {
         get {
-            UInt32(integer(forKey: Keys.selectedBackgroundColor))
-        } set {
-            set(Int(newValue), forKey: Keys.selectedBackgroundColor)
+            string(forKey: Keys.selectedBackgroundColor)
+        }
+        set {
+            set(newValue, forKey: Keys.selectedBackgroundColor)
         }
     }
     
     /// The raw numeric value of the last selected foreground color
-    var selectedForegroundColor: UInt32 {
+    var selectedForegroundColor: String? {
         get {
-            UInt32(integer(forKey: Keys.selectedForegroundColor))
-        } set {
-            set(Int(newValue), forKey: Keys.selectedForegroundColor)
+            string(forKey: Keys.selectedForegroundColor)
         }
+        set {
+            set(newValue, forKey: Keys.selectedForegroundColor)
+        }
+    }
+}
+
+
+extension UserDefaults {
+    
+    /// This function extends the existing get object function to pass in a default value and also the option to use the `AppSetting` enum instead of strings as the key
+    /// - Parameters:
+    ///   - key: The key under which the setting will be stored
+    ///   - defaultValue: This value will be used if there is nothing saved for `key` yet
+    /// - Returns: The stored value for `key` if there is one. `defaultValue` otherwise
+    func object<T>(forKey key: String, withDefault defaultValue: T) -> T {
+        return (self.object(forKey: key) as? T) ?? defaultValue
     }
 }

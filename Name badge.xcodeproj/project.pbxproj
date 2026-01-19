@@ -43,21 +43,9 @@
 
 /* Begin PBXFileReference section */
 		65ADFDE32E8860C8000A36AB /* Name badge Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Name badge Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65B6B1282F1EE52A00F94F83 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		65C08D942E893E7A002E950F /* Name badge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Name badge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		65C08DF72E903C2B002E950F /* Exceptions for "images" folder in "Name badge Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				en/01.png,
-				en/02.png,
-				en/03.png,
-				en/04.png,
-			);
-			target = 65ADFDE22E8860C8000A36AB /* Name badge Watch App */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		65ADFDE52E8860C8000A36AB /* Name badge Watch App */ = {
@@ -72,9 +60,6 @@
 		};
 		65C08DF12E903C15002E950F /* images */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				65C08DF72E903C2B002E950F /* Exceptions for "images" folder in "Name badge Watch App" target */,
-			);
 			path = images;
 			sourceTree = "<group>";
 		};
@@ -106,6 +91,7 @@
 				65C08D9F2E893FA6002E950F /* Frameworks */,
 				65ADFDE42E8860C8000A36AB /* Products */,
 				65C08DF12E903C15002E950F /* images */,
+				65B6B1282F1EE52A00F94F83 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,7 +128,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				65ADFDE52E8860C8000A36AB /* Name badge Watch App */,
-				65C08DF12E903C15002E950F /* images */,
 			);
 			name = "Name badge Watch App";
 			packageProductDependencies = (
@@ -200,6 +185,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 65ADFDDA2E8860C8000A36AB;
 			minimizedProjectReferenceProxies = 1;
@@ -320,6 +306,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -375,6 +362,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -384,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 258C524YRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -415,7 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 258C524YRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -447,7 +435,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 258C524YRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -483,7 +471,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 258C524YRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
