@@ -15,6 +15,11 @@ extension UserDefaults {
         
         static let userName = "userName"
         static let location = "location"
+        
+        static let useBackgroundImage = "useBackgroundImage"
+        static let backgroundImageData = "backgroundImageData"
+        static let backgroundImageRenderingMode = "backgroundImageRenderingMode"
+        static let backgroundImageOpacity = "backgroundImageOpacity"
     }
     
     /// The raw numeric value of the last selected background color
@@ -34,6 +39,47 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: Keys.selectedForegroundColor)
+        }
+    }
+    
+    /// Indicator, if the badge should show the last selected background image or a plain background color
+    var useBackgroundImage: Bool {
+        get {
+            bool(forKey: Keys.useBackgroundImage)
+        }
+        set {
+            set(newValue, forKey: Keys.useBackgroundImage)
+        }
+    }
+    
+    /// The data of the last selected background image.
+    /// Can also be `nil` if no image was selected
+    var backgroundImageData: Data? {
+        get {
+            data(forKey: Keys.backgroundImageData)
+        }
+        set {
+            set(newValue, forKey: Keys.backgroundImageData)
+        }
+    }
+    
+    /// The rendering mode for the background image
+    var backgroundImageRenderingMode: ImageRenderMode {
+        get {
+            ImageRenderMode(rawValue: integer(forKey: Keys.backgroundImageRenderingMode)) ?? .scaleToFill
+        }
+        set {
+            set(newValue.rawValue, forKey: Keys.backgroundImageRenderingMode)
+        }
+    }
+    
+    /// The opacity of the background image
+    var backgroundImageOpacity: Double {
+        get {
+            object(forKey: Keys.backgroundImageOpacity, withDefault: 65.0)
+        }
+        set {
+            set(newValue, forKey: Keys.backgroundImageOpacity)
         }
     }
 }

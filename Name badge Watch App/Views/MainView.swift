@@ -5,7 +5,9 @@
 //  Created by Andre Albach on 27.09.25.
 //
 
+import PhotosUI
 import SwiftUI
+
 
 /// The view model for the main view
 final class MainViewModel: ObservableObject {
@@ -20,6 +22,48 @@ final class MainViewModel: ObservableObject {
     @Published var selectedForeground: String = UserDefaults.standard.selectedForegroundColor ?? Color.white.description {
         didSet {
             UserDefaults.standard.selectedForegroundColor = selectedForeground
+        }
+    }
+    
+    /// Indicator, if the selected background image should be used or a plain background color
+    @Published var useBackgroundImage: Bool = UserDefaults.standard.useBackgroundImage {
+        didSet {
+            UserDefaults.standard.useBackgroundImage = useBackgroundImage
+        }
+    }
+    
+    @Published var selectedItem: PhotosPickerItem? = nil {
+        didSet {
+            guard let selectedItem else { return }
+            Task {
+                do {
+                    // Prefer requesting Data for control over size/encoding
+                    if let data = try await selectedItem.loadTransferable(type: Data.self) {
+                        self.imageData = data
+                    }
+                } catch {
+                    // Handle error
+                    print("Error: \(error)")
+                }
+            }
+        }
+    }
+    
+    @Published var imageData: Data? = UserDefaults.standard.backgroundImageData {
+        didSet {
+            UserDefaults.standard.backgroundImageData = imageData
+        }
+    }
+    
+    @Published var backgroundImageRenderingMode: ImageRenderMode = UserDefaults.standard.backgroundImageRenderingMode {
+        didSet {
+            UserDefaults.standard.backgroundImageRenderingMode = backgroundImageRenderingMode
+        }
+    }
+    
+    @Published var backgroundImageOpacity: Double = UserDefaults.standard.backgroundImageOpacity {
+        didSet {
+            UserDefaults.standard.backgroundImageOpacity = backgroundImageOpacity
         }
     }
 }
@@ -48,7 +92,9 @@ struct MainView: View {
                 NavigationLink(destination: {
                     NameBadgeView(userName: userName,
                                   location: location.isEmpty ? nil : location,
-                                  date: selectedDate)
+                                  date: selectedDate,
+                                  imageData: viewModel.useBackgroundImage ? viewModel.imageData : nil,
+                                  imageOpacity: viewModel.backgroundImageOpacity)
                     .background(Color(from: viewModel.selectedBackground))
                     .foregroundStyle(Color(from: viewModel.selectedForeground))
                     
@@ -68,28 +114,34 @@ struct MainView: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                     
-                    Picker("Background color", selection: $viewModel.selectedBackground, content: {
-                        ForEach (Color.colorPickerColors, id: \.self) { color in
-                            Text(verbatim: color.colorName)
-                                .tag(color.description)
-                                .foregroundStyle(color)
-                        }
-                    }, currentValueLabel: {
-                        Text(verbatim: Color(from: viewModel.selectedBackground).colorName)
-                    })
+                    ColorPicker(pickerTitle: "Background color",
+                                selectedColor: $viewModel.selectedBackground)
                     
-                    Picker("Font color", selection: $viewModel.selectedForeground, content: {
-                        ForEach (Color.colorPickerColors, id: \.self) { color in
-                            Text(verbatim: color.colorName)
-                                .tag(color.description)
-                                .foregroundStyle(color)
-                        }
-                    }, currentValueLabel: {
-                        Text(verbatim: Color(from: viewModel.selectedForeground).colorName)
-                    })
+                    ColorPicker(pickerTitle: "Font color",
+                                selectedColor: $viewModel.selectedForeground)
                     
                 }, header: {
-                    Text("configure your name badge")
+                    Text("Configure your name badge")
+                        .font(.headline)
+                        .bold()
+                })
+                
+                Section(content: {
+                    
+                    Toggle("Use background image", isOn: $viewModel.useBackgroundImage)
+                    
+                    PhotosPicker(
+                        selection: $viewModel.selectedItem,
+                        matching: .images) {
+                        Text("Pick background image")
+                    }
+                    
+                    ImageRenderModePicker(selection: $viewModel.backgroundImageRenderingMode)
+                    
+                    OpacityPicker(opacity: $viewModel.backgroundImageOpacity)
+                    
+                }, header: {
+                    Text("Background image")
                         .font(.headline)
                         .bold()
                 })
