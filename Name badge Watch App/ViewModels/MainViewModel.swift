@@ -1,3 +1,14 @@
+//
+//  MainViewModel.swift
+//  Name badge
+//
+//  Created by Andre Albach on 27.05.26.
+//
+
+import PhotosUI
+import SwiftUI
+
+
 /// The view model for the main view
 final class MainViewModel: ObservableObject {
     /// The color the user selected for the background
