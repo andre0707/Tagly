@@ -18,6 +18,8 @@ struct MainView: View {
     @AppStorage(UserDefaults.Keys.userName) private var userName: String = ""
     /// The variable which is connected to the location edit fields
     @AppStorage(UserDefaults.Keys.location) private var location: String = ""
+    /// Indicator, if the badge view is shown or not
+    @AppStorage(UserDefaults.Keys.isBadgeViewDisplayed) private var isBadgeViewDisplayed: Bool = false
     
     /// The main view model
     @StateObject private var viewModel = MainViewModel()
@@ -29,21 +31,14 @@ struct MainView: View {
                 
 //                DatePicker("Date", selection: $selectedDate, displayedComponents: .date)
                 
-                NavigationLink(destination: {
-                    NameBadgeView(userName: userName,
-                                  location: location.isEmpty ? nil : location,
-                                  date: viewModel.selectedDate,
-                                  imageData: viewModel.useBackgroundImage ? viewModel.imageData : nil,
-                                  imageOpacity: viewModel.backgroundImageOpacity)
-                    .background(Color(from: viewModel.selectedBackground))
-                    .foregroundStyle(Color(from: viewModel.selectedForeground))
-                    
-                }, label: {
+                Button {
+                    isBadgeViewDisplayed = true
+                } label: {
                     Text("Show badge")
                         .font(.title2)
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .center)
-                })
+                }
                 
                 Section(content: {
                     TextField("enter your username", text: $userName)
@@ -85,6 +80,17 @@ struct MainView: View {
                         .font(.headline)
                         .bold()
                 })
+            }
+            
+            // MARK: - Navigation destination
+            .navigationDestination(isPresented: $isBadgeViewDisplayed) {
+                NameBadgeView(userName: userName,
+                              location: location.isEmpty ? nil : location,
+                              date: viewModel.selectedDate,
+                              imageData: viewModel.useBackgroundImage ? viewModel.imageData : nil,
+                              imageOpacity: viewModel.backgroundImageOpacity)
+                .background(Color(from: viewModel.selectedBackground))
+                .foregroundStyle(Color(from: viewModel.selectedForeground))
             }
         }
     }

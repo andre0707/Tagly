@@ -1,5 +1,10 @@
 #  Changelog
 
+## Version 2.2
+
+Displaying the batch view will now be stored over multiple app starts.
+
+
 ## Version 2.1
 
 - Fixed updating shown date when app returns from background and there was a day change

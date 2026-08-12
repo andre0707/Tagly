@@ -15,6 +15,7 @@ extension UserDefaults {
         
         static let userName = "userName"
         static let location = "location"
+        static let isBadgeViewDisplayed = "isBadgeViewDisplayed"
         
         static let useBackgroundImage = "useBackgroundImage"
         static let backgroundImageData = "backgroundImageData"
